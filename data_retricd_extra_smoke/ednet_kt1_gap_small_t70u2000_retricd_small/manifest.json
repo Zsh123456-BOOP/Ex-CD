@@ -1,0 +1,42 @@
+{
+  "source_dataset": "ednet_kt1_gap_small_t70u2000",
+  "output_dataset": "ednet_kt1_gap_small_t70u2000_retricd_small",
+  "source_root": "/home/zsh/ConceptSkillCDM/data",
+  "split_mode": "chronological_per_student",
+  "split_ratio": [
+    0.7,
+    0.1,
+    0.2
+  ],
+  "seed": 42,
+  "original_rows": 397704,
+  "output_rows": 353836,
+  "target_rows": 353835,
+  "rows": {
+    "train": 246897,
+    "valid": 34667,
+    "test": 72272
+  },
+  "students": {
+    "train": 1772,
+    "valid": 1772,
+    "test": 1772
+  },
+  "cold_handling": {
+    "policy": "train-only maps with PAD/UNK ids; cold valid/test exercises or concepts are retained and mapped to UNK at load time",
+    "valid": {
+      "rows": 34667,
+      "cold_exercise_rows": 185,
+      "cold_concept_rows": 0,
+      "cold_exercise_rate": 0.005336487149162027,
+      "cold_concept_rate": 0.0
+    },
+    "test": {
+      "rows": 72272,
+      "cold_exercise_rows": 397,
+      "cold_concept_rows": 0,
+      "cold_exercise_rate": 0.005493137037856984,
+      "cold_concept_rate": 0.0
+    }
+  }
+}

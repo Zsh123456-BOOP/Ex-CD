@@ -1,0 +1,28 @@
+[OK] runtime export dependencies available
+[BUILD] reference_dataset=junyi reference_rows=353835
+[OK] built source=assist_09_chold rows=253722 target_rows=0 output=assist_09_chold
+[OK] built source=assist_12 rows=292399 target_rows=0 output=assist_12
+[OK] built source=assist_12_clean15_item50 rows=1767558 target_rows=353835 output=assist_12_clean15_item50_retricd_small
+[OK] built source=assist_15 rows=708631 target_rows=353835 output=assist_15_retricd_small
+[OK] built source=assist_17_chold rows=389977 target_rows=353835 output=assist_17_chold_retricd_small
+[OK] built source=cdbd_a0910 rows=267415 target_rows=0 output=cdbd_a0910
+[OK] built source=cdbd_lsat rows=5000 target_rows=0 output=cdbd_lsat
+[OK] built source=ednet_kt1 rows=307953 target_rows=0 output=ednet_kt1
+[OK] built source=ednet_kt1_gap rows=622428 target_rows=353835 output=ednet_kt1_gap_retricd_small
+[OK] built source=ednet_kt1_gap_probe rows=40866 target_rows=0 output=ednet_kt1_gap_probe
+[OK] built source=ednet_kt1_gap_small_t50u2600 rows=518953 target_rows=353835 output=ednet_kt1_gap_small_t50u2600_retricd_small
+[OK] built source=ednet_kt1_gap_small_t60u2200 rows=439646 target_rows=353835 output=ednet_kt1_gap_small_t60u2200_retricd_small
+[OK] built source=ednet_kt1_gap_small_t65u1200_long rows=413941 target_rows=353835 output=ednet_kt1_gap_small_t65u1200_long_retricd_small
+[OK] built source=ednet_kt1_gap_small_t70u2000 rows=397704 target_rows=353835 output=ednet_kt1_gap_small_t70u2000_retricd_small
+[OK] built source=ednet_kt1_gap_t50u5000 rows=995113 target_rows=353835 output=ednet_kt1_gap_t50u5000_retricd_small
+[OK] built source=ednet_kt1_gap_t60u5000 rows=995113 target_rows=353835 output=ednet_kt1_gap_t60u5000_retricd_small
+[OK] built source=ednet_kt1_gap_t65u3000_long rows=1028590 target_rows=353835 output=ednet_kt1_gap_t65u3000_long_retricd_small
+[OK] built source=ednet_kt1_gap_t70u5000 rows=995113 target_rows=353835 output=ednet_kt1_gap_t70u5000_retricd_small
+[OK] built source=frcsub rows=10720 target_rows=0 output=frcsub
+[OK] built source=junyi_chold rows=353835 target_rows=0 output=junyi_chold
+[OK] built source=junyi_long rows=353835 target_rows=0 output=junyi_long
+[OK] built source=junyi_sample rows=186433 target_rows=0 output=junyi_sample
+[OK] built source=math2 rows=62576 target_rows=0 output=math2
+[OK] built source=nips34_l3 rows=1382727 target_rows=353835 output=nips34_l3_retricd_small
+[RUN] dataset=assist_09_chold gpu=2 log=/home/zsh/RetriCD/logs/retricd_assist_09_chold_extra_smoke_20260612_221445.log
+[RUN] dataset=assist_12 gpu=3 log=/home/zsh/RetriCD/logs/retricd_assist_12_extra_smoke_20260612_221445.log

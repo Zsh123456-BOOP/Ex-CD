@@ -1,0 +1,42 @@
+{
+  "source_dataset": "assist_09_chold",
+  "output_dataset": "assist_09_chold",
+  "source_root": "/home/zsh/ConceptSkillCDM/data",
+  "split_mode": "chronological_per_student",
+  "split_ratio": [
+    0.7,
+    0.1,
+    0.2
+  ],
+  "seed": 42,
+  "original_rows": 253722,
+  "output_rows": 253722,
+  "target_rows": 0,
+  "rows": {
+    "train": 176681,
+    "valid": 24467,
+    "test": 52574
+  },
+  "students": {
+    "train": 2006,
+    "valid": 2006,
+    "test": 2006
+  },
+  "cold_handling": {
+    "policy": "train-only maps with PAD/UNK ids; cold valid/test exercises or concepts are retained and mapped to UNK at load time",
+    "valid": {
+      "rows": 24467,
+      "cold_exercise_rows": 359,
+      "cold_concept_rows": 0,
+      "cold_exercise_rate": 0.01467282462091797,
+      "cold_concept_rate": 0.0
+    },
+    "test": {
+      "rows": 52574,
+      "cold_exercise_rows": 939,
+      "cold_concept_rows": 0,
+      "cold_exercise_rate": 0.01786053943013657,
+      "cold_concept_rate": 0.0
+    }
+  }
+}

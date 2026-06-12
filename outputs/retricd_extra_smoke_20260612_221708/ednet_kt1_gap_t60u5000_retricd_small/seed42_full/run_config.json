@@ -1,0 +1,33 @@
+{
+  "dataset": "ednet_kt1_gap_t60u5000_retricd_small",
+  "data_root": "/home/zsh/RetriCD/data_retricd_extra_smoke",
+  "output_dir": "/home/zsh/RetriCD/outputs/retricd_extra_smoke_20260612_221708",
+  "variant": "full",
+  "seed": 42,
+  "max_history_len": 128,
+  "max_concepts": 8,
+  "topk": 16,
+  "embed_dim": 64,
+  "batch_size": 256,
+  "epochs": 5,
+  "patience": 5,
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "dropout": 0.15,
+  "temperature": 0.5,
+  "fidelity_margin_weight": 0.2,
+  "fidelity_margin": 0.02,
+  "num_workers": 0,
+  "export_support_limit": 5000,
+  "case_limit": 200,
+  "device": "auto",
+  "use_student_id_embedding": false,
+  "use_text_branch": false,
+  "retriever_terms": {
+    "latent_sim": true,
+    "concept_overlap": true,
+    "difficulty_sim": true,
+    "recency": true,
+    "text_sim": false
+  }
+}

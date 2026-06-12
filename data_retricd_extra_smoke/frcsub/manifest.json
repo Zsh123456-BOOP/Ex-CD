@@ -1,0 +1,42 @@
+{
+  "source_dataset": "frcsub",
+  "output_dataset": "frcsub",
+  "source_root": "/home/zsh/ConceptSkillCDM/data",
+  "split_mode": "chronological_per_student",
+  "split_ratio": [
+    0.7,
+    0.1,
+    0.2
+  ],
+  "seed": 42,
+  "original_rows": 10720,
+  "output_rows": 10720,
+  "target_rows": 0,
+  "rows": {
+    "train": 7504,
+    "valid": 1072,
+    "test": 2144
+  },
+  "students": {
+    "train": 536,
+    "valid": 536,
+    "test": 536
+  },
+  "cold_handling": {
+    "policy": "train-only maps with PAD/UNK ids; cold valid/test exercises or concepts are retained and mapped to UNK at load time",
+    "valid": {
+      "rows": 1072,
+      "cold_exercise_rows": 0,
+      "cold_concept_rows": 0,
+      "cold_exercise_rate": 0.0,
+      "cold_concept_rate": 0.0
+    },
+    "test": {
+      "rows": 2144,
+      "cold_exercise_rows": 0,
+      "cold_concept_rows": 0,
+      "cold_exercise_rate": 0.0,
+      "cold_concept_rate": 0.0
+    }
+  }
+}
