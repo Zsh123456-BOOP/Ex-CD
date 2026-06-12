@@ -75,6 +75,18 @@ RetriCD should answer a narrower claim than CRG: for each query, the prediction 
   - `/home/zsh/RetriCD/outputs/analysis_smoke/assist_09/weak_evidence_counts.csv`
   - `/home/zsh/RetriCD/outputs/challenge_smoke/assist_09/test_challenge_sets.csv`
 
+### Complete Full Run
+
+- Run id: `retricd_complete_full_20260612_165433`
+- Launcher PID: `634704`
+- Launcher log: `/home/zsh/RetriCD/logs/retricd_complete_full_20260612_165433_launcher.log`
+- Output root: `/home/zsh/RetriCD/outputs/retricd_complete_full_20260612_165433`
+- First wave logs:
+  - `/home/zsh/RetriCD/logs/retricd_assist_09_full_20260612_165433.log`
+  - `/home/zsh/RetriCD/logs/retricd_assist_17_full_20260612_165433.log`
+- First status check: launcher alive after 42 seconds; GPU 2 and GPU 3 active; `assist_09` and `assist_17` both reached epoch 2.
+- Planned second wave from the same launcher: `junyi` on GPU 2 and `nips34_retricd_small` on GPU 3.
+
 ## MVP Scope
 
 The first `full` model contains:
