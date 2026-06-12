@@ -164,7 +164,7 @@ def train_one_dataset(cfg: RunConfig) -> Dict[str, Dict]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run RetriCD experiments.")
     parser.add_argument("--config")
-    parser.add_argument("--dataset", choices=DEFAULT_DATASETS + ("all",), default=None)
+    parser.add_argument("--dataset", default=None)
     parser.add_argument("--data-root")
     parser.add_argument("--output-dir")
     parser.add_argument("--variant", default=None)
@@ -240,4 +240,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
