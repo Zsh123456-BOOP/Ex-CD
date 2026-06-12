@@ -86,6 +86,11 @@ RetriCD should answer a narrower claim than CRG: for each query, the prediction 
   - `/home/zsh/RetriCD/logs/retricd_assist_17_full_20260612_165433.log`
 - First status check: launcher alive after 42 seconds; GPU 2 and GPU 3 active; `assist_09` and `assist_17` both reached epoch 2.
 - Planned second wave from the same launcher: `junyi` on GPU 2 and `nips34_retricd_small` on GPU 3.
+- Complete evidence/challenge files generated for all four prepared datasets under:
+  - `/home/zsh/RetriCD/outputs/analysis_complete`
+  - `/home/zsh/RetriCD/outputs/challenge_complete`
+- Ablation watcher PID: `638283`; it waits for full PID `634704` to finish, then runs `scripts/run_retricd_ablation.sh` on `assist_09` and `junyi`.
+- Ablation watcher log: `/home/zsh/RetriCD/logs/retricd_ablation_after_full_20260612_165433.log`
 
 ## MVP Scope
 
