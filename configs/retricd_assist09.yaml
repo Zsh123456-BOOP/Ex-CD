@@ -1,0 +1,30 @@
+model_family: retricd
+dataset: assist_09
+data_root: data_retricd
+split_mode: chronological_per_student
+split_ratio: [0.7, 0.1, 0.2]
+max_history_len: 128
+topk: 16
+embed_dim: 64
+batch_size: 256
+learning_rate: 0.001
+use_text_branch: false
+use_student_id_embedding: false
+retriever:
+  latent_sim: true
+  concept_overlap: true
+  difficulty_sim: true
+  recency: true
+  text_sim: false
+loss:
+  bce_weight: 1.0
+  fidelity_margin_weight: 0.2
+  fidelity_margin: 0.02
+eval:
+  run_overall: true
+  run_challenge_subsets: true
+  run_support_deletion: true
+  run_support_corruption: true
+  run_shuffle_student: true
+  export_cases: true
+
