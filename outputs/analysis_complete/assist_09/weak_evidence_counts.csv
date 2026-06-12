@@ -1,0 +1,13 @@
+split,subset,rows,total
+train,direct_seen,154619,186055
+train,partial_overlap,3900,186055
+train,target_concept_unseen,27536,186055
+train,short_history,46598,186055
+valid,direct_seen,24687,25608
+valid,partial_overlap,152,25608
+valid,target_concept_unseen,769,25608
+valid,short_history,1248,25608
+test,direct_seen,54026,55760
+test,partial_overlap,252,55760
+test,target_concept_unseen,1482,55760
+test,short_history,2878,55760

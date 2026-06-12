@@ -1,0 +1,42 @@
+{
+  "source_dataset": "assist_17",
+  "output_dataset": "assist_17",
+  "source_root": "/home/zsh/RetriCD/data_source",
+  "split_mode": "chronological_per_student",
+  "split_ratio": [
+    0.7,
+    0.1,
+    0.2
+  ],
+  "seed": 42,
+  "original_rows": 390281,
+  "output_rows": 390281,
+  "target_rows": 0,
+  "rows": {
+    "train": 272400,
+    "valid": 38261,
+    "test": 79620
+  },
+  "students": {
+    "train": 1702,
+    "valid": 1702,
+    "test": 1702
+  },
+  "cold_handling": {
+    "policy": "train-only maps with PAD/UNK ids; cold valid/test exercises or concepts are retained and mapped to UNK at load time",
+    "valid": {
+      "rows": 38261,
+      "cold_exercise_rows": 36,
+      "cold_concept_rows": 1,
+      "cold_exercise_rate": 0.0009409058832753979,
+      "cold_concept_rate": 2.613627453542772e-05
+    },
+    "test": {
+      "rows": 79620,
+      "cold_exercise_rows": 90,
+      "cold_concept_rows": 1,
+      "cold_exercise_rate": 0.0011303692539562924,
+      "cold_concept_rate": 1.2559658377292137e-05
+    }
+  }
+}
