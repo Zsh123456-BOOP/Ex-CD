@@ -1,0 +1,18 @@
+# nips34_retricd_small: 1,259 students; multi-concept items sharing a root concept, so the
+# target_concept_unseen regime is ~0. Good for the dense/near-uniform exposure cross-check.
+dataset: nips34_retricd_small
+data_root: data_retricd
+output_dir: outputs
+model: ncdm
+variant: vanilla
+epochs: 25
+batch_size: 256
+lr: 0.002
+latent_dim: 32
+dropout: 0.5
+propensity_floor: 0.05
+doa_max_responders: 80
+doa_min_pairs: 10
+patience: 6
+seed: 42
+device: auto

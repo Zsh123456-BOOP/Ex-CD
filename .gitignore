@@ -3,6 +3,7 @@ __pycache__/
 .DS_Store
 
 data/
+data_retricd/_stress/
 outputs/
 logs/
 checkpoints/

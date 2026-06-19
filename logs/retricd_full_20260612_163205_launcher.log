@@ -1,3 +1,0 @@
-[RUN] dataset=assist_17 gpu=3 log=/home/zsh/RetriCD/logs/retricd_assist_17_full_20260612_163205.log
-[RUN] dataset=assist_09 gpu=2 log=/home/zsh/RetriCD/logs/retricd_assist_09_full_20260612_163205.log
-[DONE] dataset=assist_09 log=/home/zsh/RetriCD/logs/retricd_assist_09_full_20260612_163205.log

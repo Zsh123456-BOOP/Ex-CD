@@ -1,0 +1,18 @@
+# Note: junyi has concept == exercise_id (1:1), so concept overlap is degenerate. Treat as a
+# stress case for the exposure story, not the headline dataset.
+dataset: junyi
+data_root: data_retricd
+output_dir: outputs
+model: ncdm
+variant: vanilla
+epochs: 20
+batch_size: 512
+lr: 0.002
+latent_dim: 32
+dropout: 0.5
+propensity_floor: 0.05
+doa_max_responders: 80
+doa_min_pairs: 10
+patience: 5
+seed: 42
+device: auto
