@@ -77,6 +77,9 @@ def run_stress(args) -> None:
                     "variant": variant,
                     "auc": res["test"]["auc"],
                     "doa": res["test"]["doa"],
+                    "bottom_group_doa": strat["bottom_group_doa"],
+                    "top_group_doa": strat["top_group_doa"],
+                    "group_gap": strat["group_gap"],
                     "tail_decile_doa": strat["tail_decile_doa"],
                     "head_decile_doa": strat["head_decile_doa"],
                     "head_minus_tail_gap": strat["head_minus_tail_gap"],
@@ -86,7 +89,11 @@ def run_stress(args) -> None:
     out_dir = os.path.join(args.output_dir, "mnar_stress")
     os.makedirs(out_dir, exist_ok=True)
     summary_path = os.path.join(out_dir, f"{args.dataset}_{args.model}_stress_summary.csv")
-    cols = ["gamma", "variant", "auc", "doa", "tail_decile_doa", "head_decile_doa", "head_minus_tail_gap"]
+    cols = [
+        "gamma", "variant", "auc", "doa",
+        "bottom_group_doa", "top_group_doa", "group_gap",
+        "tail_decile_doa", "head_decile_doa", "head_minus_tail_gap",
+    ]
     with open(summary_path, "w") as f:
         f.write(",".join(cols) + "\n")
         for row in summary:

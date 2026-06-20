@@ -36,18 +36,20 @@ class RunConfig:
     output_dir: str = "outputs"
     model: str = "ncdm"               # ncdm | kancd
     variant: str = "vanilla"          # vanilla | ips | dr
-    epochs: int = 15
+    epochs: int = 30
     batch_size: int = 256
-    lr: float = 2e-3
+    lr: float = 1e-3
     weight_decay: float = 0.0
+    grad_clip: float = 5.0            # 0 disables gradient-norm clipping
     latent_dim: int = 32              # kancd only
-    dropout: float = 0.5
+    dropout: float = 0.2
     hidden: tuple = (256, 128)
     propensity_floor: float = 0.05
+    ips_weight_cap: float = 10.0      # clip per-sample IPS weight before mean-normalisation
     doa_max_responders: int = 80
     doa_min_pairs: int = 5
     num_workers: int = 2
-    patience: int = 5                 # early stopping on valid AUC
+    patience: int = 8                 # early stopping on valid AUC
     seed: int = 42
     device: str = "auto"
     save_mastery: bool = False
@@ -90,7 +92,7 @@ def run(cfg: RunConfig) -> Dict:
     vocab = build_vocab(train_df, propensity_floor=cfg.propensity_floor)
     collate = make_collate(vocab.num_concepts)
 
-    train_ds = CDDataset(train_df, vocab, use_ips=use_ips)
+    train_ds = CDDataset(train_df, vocab, use_ips=use_ips, ips_weight_cap=cfg.ips_weight_cap)
     valid_ds = CDDataset(valid_df, vocab, use_ips=False)
     test_ds = CDDataset(test_df, vocab, use_ips=False)
 
@@ -148,7 +150,10 @@ def run(cfg: RunConfig) -> Dict:
 
             optimizer.zero_grad()
             loss.backward()
+            if cfg.grad_clip and cfg.grad_clip > 0:
+                torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.grad_clip)
             optimizer.step()
+            model.clip_monotonicity()  # enforce non-negative interaction weights post-step
             losses.append(float(loss.detach().cpu()))
 
         valid_probs = _eval_split(model, valid_loader, device)
@@ -264,9 +269,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--batch-size", type=int)
     p.add_argument("--lr", type=float)
     p.add_argument("--weight-decay", type=float)
+    p.add_argument("--grad-clip", type=float)
     p.add_argument("--latent-dim", type=int)
     p.add_argument("--dropout", type=float)
     p.add_argument("--propensity-floor", type=float)
+    p.add_argument("--ips-weight-cap", type=float)
     p.add_argument("--doa-max-responders", type=int)
     p.add_argument("--doa-min-pairs", type=int)
     p.add_argument("--num-workers", type=int)

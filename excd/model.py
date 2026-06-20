@@ -14,34 +14,34 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class PosLinear(nn.Linear):
-    """Linear layer constrained to non-negative weights (enforces monotonicity)."""
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        with torch.no_grad():
-            self.weight.abs_()
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return F.linear(x, torch.clamp(self.weight, min=0.0), self.bias)
-
-
 class InteractionNet(nn.Module):
-    def __init__(self, num_concepts: int, hidden=(256, 128), dropout: float = 0.5):
+    """Monotone interaction net (canonical NeuralCDM).
+
+    Plain Linear layers whose weights are clamped to >= 0 by ``clip_weights()`` AFTER each
+    optimizer step. Clamping inside ``forward`` (the previous approach) gives negative weights
+    zero gradient, so they die and the network collapses to a constant output — the
+    post-step clipper keeps gradients flowing and is stable.
+    """
+
+    def __init__(self, num_concepts: int, hidden=(256, 128), dropout: float = 0.2):
         super().__init__()
-        self.net = nn.Sequential(
-            PosLinear(num_concepts, hidden[0]),
-            nn.Sigmoid(),
-            nn.Dropout(dropout),
-            PosLinear(hidden[0], hidden[1]),
-            nn.Sigmoid(),
-            nn.Dropout(dropout),
-            PosLinear(hidden[1], 1),
-            nn.Sigmoid(),
-        )
+        self.fc1 = nn.Linear(num_concepts, hidden[0])
+        self.fc2 = nn.Linear(hidden[0], hidden[1])
+        self.fc3 = nn.Linear(hidden[1], 1)
+        self.drop = nn.Dropout(dropout)
+        for fc in (self.fc1, self.fc2, self.fc3):
+            nn.init.xavier_normal_(fc.weight)
+            nn.init.zeros_(fc.bias)
+        self.clip_weights()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.net(x).squeeze(-1)
+        x = self.drop(torch.sigmoid(self.fc1(x)))
+        x = self.drop(torch.sigmoid(self.fc2(x)))
+        return torch.sigmoid(self.fc3(x)).squeeze(-1)
+
+    def clip_weights(self) -> None:
+        for fc in (self.fc1, self.fc2, self.fc3):
+            fc.weight.data.clamp_(min=0.0)
 
 
 class CDM(nn.Module):
@@ -53,7 +53,7 @@ class CDM(nn.Module):
         model_type: str = "ncdm",
         latent_dim: int = 32,
         hidden=(256, 128),
-        dropout: float = 0.5,
+        dropout: float = 0.2,
         with_imputation: bool = False,
     ):
         super().__init__()
@@ -109,6 +109,10 @@ class CDM(nn.Module):
         if not self.with_imputation:
             raise RuntimeError("model built without imputation head (with_imputation=False)")
         return self.imp(x).squeeze(-1).clamp(1e-6, 1.0 - 1e-6)
+
+    def clip_monotonicity(self) -> None:
+        """Enforce non-negative interaction weights. Call AFTER each optimizer step."""
+        self.net.clip_weights()
 
     @torch.no_grad()
     def mastery_matrix(self, device, batch: int = 8192) -> np.ndarray:

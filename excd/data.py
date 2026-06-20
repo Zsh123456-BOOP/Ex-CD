@@ -102,7 +102,7 @@ class CDDataset:
     directly, so this module stays importable without torch.
     """
 
-    def __init__(self, df: pd.DataFrame, vocab: Vocab, use_ips: bool = False):
+    def __init__(self, df: pd.DataFrame, vocab: Vocab, use_ips: bool = False, ips_weight_cap: float = 10.0):
         df = df[df["stu_id"].isin(vocab.student_map)].reset_index(drop=True)
         self.student = df["stu_id"].map(vocab.student_map).astype(np.int64).to_numpy()
         self.exercise = (
@@ -121,7 +121,10 @@ class CDDataset:
             for i, cl in enumerate(self.concept_lists):
                 p = float(np.mean([prop[k] for k in cl])) if cl else 1.0
                 weight[i] = 1.0 / max(p, 1e-6)
-            # normalise so the mean training weight is 1 (keeps the loss scale comparable)
+            # cap extreme weights (rare concepts) to avoid early-training instability, then
+            # normalise so the mean training weight is 1 (keeps the loss scale comparable).
+            if ips_weight_cap and ips_weight_cap > 0:
+                weight = np.minimum(weight, ips_weight_cap)
             if weight.sum() > 0:
                 weight *= len(weight) / float(weight.sum())
         self.weight = weight
