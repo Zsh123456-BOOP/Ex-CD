@@ -1,0 +1,18 @@
+# junyi: concept == exercise_id (1:1). The Q has no multi-concept structure, so every concept is
+# its own pure item -> the structural gate passes trivially; treat junyi as a stress/edge case for
+# the certificate (coverage count is the only signal), not the headline dataset.
+dataset: junyi
+data_root: data_retricd
+output_dir: outputs
+model: ncdm
+epochs: 30
+lr: 0.001
+batch_size: 512
+dropout: 0.2
+latent_dim: 32
+grad_clip: 5.0
+patience: 8
+n_min: 2
+mc_passes: 20
+seed: 42
+device: auto

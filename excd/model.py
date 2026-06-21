@@ -114,6 +114,19 @@ class CDM(nn.Module):
         """Enforce non-negative interaction weights. Call AFTER each optimizer step."""
         self.net.clip_weights()
 
+    def smoothing_penalty(self, propensity: torch.Tensor) -> torch.Tensor:
+        """Exposure-weighted shrinkage of per-concept proficiency toward each student's mean
+        ability. Rare concepts (low propensity) are under-identified; pulling them toward the
+        student's general ability lets them borrow strength, which IPS reweighting cannot do.
+        ``propensity`` is a [num_concepts] tensor in (0, 1]; weight = (1 - propensity)."""
+        if self.model_type == "ncdm":
+            prof = self.student_emb.weight                      # [S, K] pre-sigmoid proficiency
+        else:
+            prof = self.student_emb.weight @ self.knowledge.t()  # [S, K] derived
+        row_mean = prof.mean(dim=1, keepdim=True)
+        w = (1.0 - propensity).clamp(min=0.0)                    # [K]
+        return (((prof - row_mean) ** 2) * w.unsqueeze(0)).mean()
+
     @torch.no_grad()
     def mastery_matrix(self, device, batch: int = 8192) -> np.ndarray:
         """Return the [num_students, num_concepts] per-concept mastery artifact."""

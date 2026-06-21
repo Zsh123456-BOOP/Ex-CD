@@ -15,7 +15,11 @@ COLUMNS = [
     "dataset", "model", "variant", "seed",
     "auc", "acc", "rmse", "bce", "doa",
     "bottom_group_doa", "top_group_doa", "group_gap",
-    "tail_decile_doa", "head_decile_doa", "head_minus_tail_gap", "n_measurable_deciles",
+    "group_gap_ci_low", "group_gap_ci_high", "group_gap_p_le_0",
+    "ability_doa", "ability_bottom_doa",
+    "centered_doa", "centered_bottom_doa", "centered_top_doa",
+    "specificity_std",
+    "n_measurable_deciles",
     "best_valid_auc", "best_epoch", "n",
 ]
 
@@ -30,6 +34,8 @@ def collect(output_dir: str):
             continue
         test = m.get("test", {})
         strat = test.get("exposure_stratified_doa", {}) or {}
+        ab_strat = test.get("ability_stratified_doa", {}) or {}
+        ce_strat = test.get("centered_stratified_doa", {}) or {}
         rows.append(
             {
                 "dataset": m.get("dataset"),
@@ -44,9 +50,15 @@ def collect(output_dir: str):
                 "bottom_group_doa": strat.get("bottom_group_doa"),
                 "top_group_doa": strat.get("top_group_doa"),
                 "group_gap": strat.get("group_gap"),
-                "tail_decile_doa": strat.get("tail_decile_doa"),
-                "head_decile_doa": strat.get("head_decile_doa"),
-                "head_minus_tail_gap": strat.get("head_minus_tail_gap"),
+                "group_gap_ci_low": (strat.get("group_gap_ci95") or [None, None])[0],
+                "group_gap_ci_high": (strat.get("group_gap_ci95") or [None, None])[1],
+                "group_gap_p_le_0": strat.get("group_gap_p_le_0"),
+                "ability_doa": test.get("ability_doa"),
+                "ability_bottom_doa": ab_strat.get("bottom_group_doa"),
+                "centered_doa": test.get("centered_doa"),
+                "centered_bottom_doa": ce_strat.get("bottom_group_doa"),
+                "centered_top_doa": ce_strat.get("top_group_doa"),
+                "specificity_std": test.get("mastery_specificity_std"),
                 "n_measurable_deciles": strat.get("n_measurable_deciles"),
                 "best_valid_auc": m.get("best_valid_auc"),
                 "best_epoch": m.get("best_epoch"),

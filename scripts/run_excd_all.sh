@@ -20,8 +20,8 @@ LOG_DIR="logs"
 mkdir -p "${LOG_DIR}" "${RUN_OUT}"
 
 DATASETS=("assist_09" "assist_17" "junyi" "nips34_retricd_small")
-MODELS=("ncdm")            # add "kancd" to compare backbones
-VARIANTS=("vanilla" "ips") # add "dr" for the doubly-robust variant
+MODELS=("ncdm" "kancd")             # kancd tests whether low-rank concept sharing shrinks the cliff
+VARIANTS=("vanilla" "ips" "shrink") # vanilla=baseline, ips=reweight (expected to fail), shrink=identifiability fix
 
 echo "Ex-CD sweep ${TS} | python=${PY} device=${DEVICE} out=${RUN_OUT}"
 for ds in "${DATASETS[@]}"; do

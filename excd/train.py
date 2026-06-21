@@ -35,7 +35,8 @@ class RunConfig:
     data_root: str = "data_retricd"
     output_dir: str = "outputs"
     model: str = "ncdm"               # ncdm | kancd
-    variant: str = "vanilla"          # vanilla | ips | dr
+    variant: str = "vanilla"          # vanilla | ips | dr | shrink
+    smooth_weight: float = 0.1        # shrink variant: exposure-weighted smoothing strength
     epochs: int = 30
     batch_size: int = 256
     lr: float = 1e-3
@@ -121,6 +122,7 @@ def run(cfg: RunConfig) -> Dict:
     ).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
+    propensity_t = torch.tensor(vocab.concept_propensity, dtype=torch.float32, device=device)
 
     history = []
     best_auc = -1.0
@@ -144,6 +146,8 @@ def run(cfg: RunConfig) -> Dict:
                 loss = vanilla_bce(prob, label)
             elif cfg.variant == "ips":
                 loss = ips_bce(prob, label, weight)
+            elif cfg.variant == "shrink":
+                loss = vanilla_bce(prob, label) + cfg.smooth_weight * model.smoothing_penalty(propensity_t)
             else:  # dr
                 imp_prob = model.impute(x.detach())
                 loss = dr_loss(prob, label, weight, imp_prob) + imputation_bce(imp_prob, label, weight)
@@ -192,29 +196,67 @@ def run(cfg: RunConfig) -> Dict:
     test_probs = _eval_split(model, test_loader, device)
     test_metrics = binary_metrics(test_ds.label, test_probs)
 
+    def _doa_block(mastery_mat):
+        d, agg, pairs = compute_doa(
+            mastery_mat,
+            test_ds.student,
+            test_ds.exercise,
+            test_ds.concept_lists,
+            test_ds.label,
+            num_concepts=vocab.num_concepts,
+            max_responders_per_item=cfg.doa_max_responders,
+            min_pairs=cfg.doa_min_pairs,
+            seed=cfg.seed,
+        )
+        return d, agg, pairs, stratified_doa(d, vocab.exposure_decile, pair_counts=pairs)
+
     mastery = model.mastery_matrix(device)
-    doa_per_concept, doa_agg = compute_doa(
-        mastery,
-        test_ds.student,
-        test_ds.exercise,
-        test_ds.concept_lists,
-        test_ds.label,
-        num_concepts=vocab.num_concepts,
-        max_responders_per_item=cfg.doa_max_responders,
-        min_pairs=cfg.doa_min_pairs,
-        seed=cfg.seed,
-    )
-    strat = stratified_doa(doa_per_concept, vocab.exposure_decile)
+    doa_per_concept, doa_agg, doa_pairs, strat = _doa_block(mastery)
+
+    # --- Ability-leakage diagnostics (decides "real method" vs "ability substitution") ---
+    # 1) Ability baseline: model-free per-student train accuracy, broadcast across all concepts.
+    #    DOA above this means the mastery carries signal beyond raw student ability.
+    train_acc = np.full(vocab.num_students, 0.5, dtype=np.float32)
+    _sum = np.zeros(vocab.num_students, dtype=np.float64)
+    _cnt = np.zeros(vocab.num_students, dtype=np.float64)
+    np.add.at(_sum, train_ds.student, train_ds.label)
+    np.add.at(_cnt, train_ds.student, 1.0)
+    nz = _cnt > 0
+    train_acc[nz] = (_sum[nz] / _cnt[nz]).astype(np.float32)
+    ability_mat = np.repeat(train_acc.reshape(-1, 1), vocab.num_concepts, axis=1)
+    _, ability_doa_agg, _, ability_strat = _doa_block(ability_mat)
+
+    # 2) Centered mastery: remove each student's mean -> isolates CONCEPT-SPECIFIC ranking.
+    #    If centered DOA ~ 0.5, the mastery has no concept signal beyond ability.
+    centered = mastery - mastery.mean(axis=1, keepdims=True)
+    _, centered_doa_agg, _, centered_strat = _doa_block(centered)
+
+    # 3) Specificity: mean within-student spread of mastery across concepts (shrink flattens it).
+    specificity = float(np.nanmean(mastery.std(axis=1)))
+
     eval_seconds = time.time() - t_eval
 
     test_metrics["doa"] = doa_agg
     test_metrics["exposure_stratified_doa"] = strat
+    test_metrics["ability_doa"] = ability_doa_agg
+    test_metrics["ability_stratified_doa"] = ability_strat
+    test_metrics["centered_doa"] = centered_doa_agg
+    test_metrics["centered_stratified_doa"] = centered_strat
+    test_metrics["mastery_specificity_std"] = specificity
 
+    ci = strat.get("group_gap_ci95")
+    ci_str = f"[{ci[0]:.4f},{ci[1]:.4f}]" if ci else "n/a"
     print(
         f"  TEST auc {test_metrics['auc']:.4f} acc {test_metrics['acc']:.4f} rmse {test_metrics['rmse']:.4f} "
         f"| DOA {doa_agg:.4f} | bottom(d0-2) {strat['bottom_group_doa']:.4f} top(d7-9) {strat['top_group_doa']:.4f} "
-        f"group_gap {strat['group_gap']:.4f} | measurable_deciles {strat['n_measurable_deciles']}/10 "
-        f"| doa_eval {eval_seconds:.1f}s",
+        f"group_gap {strat['group_gap']:.4f} CI95 {ci_str} p(gap<=0) {strat.get('group_gap_p_le_0', float('nan')):.3f} "
+        f"| measurable_deciles {strat['n_measurable_deciles']}/10 | doa_eval {eval_seconds:.1f}s",
+        flush=True,
+    )
+    print(
+        f"  LEAKAGE-CHECK | ability_DOA {ability_doa_agg:.4f} (bottom {ability_strat['bottom_group_doa']:.4f}) "
+        f"| centered_DOA {centered_doa_agg:.4f} (bottom {centered_strat['bottom_group_doa']:.4f} top {centered_strat['top_group_doa']:.4f}) "
+        f"| specificity_std {specificity:.4f}",
         flush=True,
     )
 
@@ -241,14 +283,14 @@ def run(cfg: RunConfig) -> Dict:
         f.write("epoch,train_loss,valid_auc,valid_acc,valid_rmse\n")
         for h in history:
             f.write(f"{h['epoch']},{h['train_loss']:.6f},{h['valid_auc']:.6f},{h['valid_acc']:.6f},{h['valid_rmse']:.6f}\n")
-    # per-concept DOA + exposure (so the cliff can be re-plotted without re-running)
+    # per-concept DOA + exposure + pair support (so the cliff can be re-plotted without re-running)
     with open(os.path.join(out_dir, "concept_doa.csv"), "w") as f:
-        f.write("concept_index,exposure_count,exposure_decile,doa\n")
+        f.write("concept_index,exposure_count,exposure_decile,doa,doa_pairs\n")
         for k in range(vocab.num_concepts):
             d = doa_per_concept[k]
             f.write(
                 f"{k},{int(vocab.concept_exposure[k])},{int(vocab.exposure_decile[k])},"
-                f"{'' if np.isnan(d) else f'{d:.6f}'}\n"
+                f"{'' if np.isnan(d) else f'{d:.6f}'},{int(doa_pairs[k])}\n"
             )
     if cfg.save_mastery:
         np.save(os.path.join(out_dir, "mastery.npy"), mastery)
@@ -264,7 +306,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--data-root", type=str)
     p.add_argument("--output-dir", type=str)
     p.add_argument("--model", type=str, choices=["ncdm", "kancd"])
-    p.add_argument("--variant", type=str, choices=["vanilla", "ips", "dr"])
+    p.add_argument("--variant", type=str, choices=["vanilla", "ips", "dr", "shrink"])
+    p.add_argument("--smooth-weight", type=float)
     p.add_argument("--epochs", type=int)
     p.add_argument("--batch-size", type=int)
     p.add_argument("--lr", type=float)

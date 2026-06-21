@@ -45,8 +45,8 @@ def compute_doa(
     max_responders_per_item: int = 80,
     min_pairs: int = 10,
     seed: int = 42,
-) -> Tuple[np.ndarray, float]:
-    """Return (per_concept_doa[num_concepts], aggregate_doa).
+) -> Tuple[np.ndarray, float, np.ndarray]:
+    """Return (per_concept_doa[num_concepts], aggregate_doa, per_concept_pair_counts).
 
     For each concept k and each item j tagged with k on the eval split, form all
     (correct, incorrect) responder pairs; the correct responder should have higher mastery
@@ -62,6 +62,7 @@ def compute_doa(
             by_concept_item[k][int(e)].append((int(s), float(y)))
 
     doa = np.full(num_concepts, np.nan, dtype=np.float64)
+    pair_counts = np.zeros(num_concepts, dtype=np.float64)
     for k, items in by_concept_item.items():
         num = 0.0
         den = 0.0
@@ -79,11 +80,12 @@ def compute_doa(
             diff = mc[:, None] - mi[None, :]
             den += diff.size
             num += float((diff > 0).sum()) + 0.5 * float((diff == 0).sum())
+        pair_counts[k] = den
         if den >= min_pairs:
             doa[k] = num / den
     valid = doa[~np.isnan(doa)]
     aggregate = float(valid.mean()) if valid.size else float("nan")
-    return doa, aggregate
+    return doa, aggregate, pair_counts
 
 
 def _group_mean(doa: np.ndarray, exposure_decile: np.ndarray, deciles) -> float:
@@ -91,20 +93,31 @@ def _group_mean(doa: np.ndarray, exposure_decile: np.ndarray, deciles) -> float:
     return float(doa[sel].mean()) if sel.any() else float("nan")
 
 
-def stratified_doa(doa: np.ndarray, exposure_decile: np.ndarray) -> Dict:
+def stratified_doa(
+    doa: np.ndarray,
+    exposure_decile: np.ndarray,
+    pair_counts: np.ndarray = None,
+    n_boot: int = 1000,
+    seed: int = 123,
+) -> Dict:
     """DOA bucketed by per-concept exposure decile (0 = rarest/tail, 9 = head).
 
-    Reports per-decile DOA, the single-decile head-minus-tail gap, AND a robust
-    bottom-group (deciles 0-2) vs top-group (deciles 7-9) gap. The rarest concepts are
-    often too data-poor to measure DOA per single decile (NaN), so the GROUP gap is the
-    headline; ``n_measurable_deciles`` flags how trustworthy the stratification is.
+    Reports per-decile DOA + pair support, the single-decile head-minus-tail gap, and a
+    robust bottom-group (deciles 0-2) vs top-group (deciles 7-9) gap. When ``pair_counts``
+    is given, adds a concept-level bootstrap 95% CI on the group gap and ``group_gap_p_le_0``
+    (fraction of bootstrap gaps <= 0) — the artifact check that decides whether the cliff is
+    statistically real or just few-pair noise. ``bottom_group_ci95`` vs 0.5 says whether the
+    rare-concept DOA is genuinely near chance.
     """
     per_decile: Dict[str, float] = {}
     counts: Dict[str, int] = {}
+    per_decile_pairs: Dict[str, int] = {}
     for d in range(10):
         sel = (exposure_decile == d) & ~np.isnan(doa)
         counts[str(d)] = int(sel.sum())
         per_decile[str(d)] = float(doa[sel].mean()) if sel.any() else float("nan")
+        if pair_counts is not None:
+            per_decile_pairs[str(d)] = int(pair_counts[exposure_decile == d].sum())
 
     head = per_decile["9"]
     tail = per_decile["0"]
@@ -114,9 +127,10 @@ def stratified_doa(doa: np.ndarray, exposure_decile: np.ndarray) -> Dict:
     top_group = _group_mean(doa, exposure_decile, [7, 8, 9])
     group_gap = float(top_group - bottom_group) if not (np.isnan(top_group) or np.isnan(bottom_group)) else float("nan")
 
-    return {
+    out = {
         "per_decile": per_decile,
         "decile_counts": counts,
+        "per_decile_pairs": per_decile_pairs,
         "n_measurable_deciles": int(sum(1 for d in range(10) if not np.isnan(per_decile[str(d)]))),
         "head_decile_doa": head,
         "tail_decile_doa": tail,
@@ -125,3 +139,20 @@ def stratified_doa(doa: np.ndarray, exposure_decile: np.ndarray) -> Dict:
         "top_group_doa": top_group,
         "group_gap": group_gap,
     }
+
+    # Concept-level bootstrap CI on the gap (artifact check).
+    bottom_idx = np.where(np.isin(exposure_decile, [0, 1, 2]) & ~np.isnan(doa))[0]
+    top_idx = np.where(np.isin(exposure_decile, [7, 8, 9]) & ~np.isnan(doa))[0]
+    if bottom_idx.size and top_idx.size:
+        rng = np.random.default_rng(seed)
+        bots = np.empty(n_boot)
+        tops = np.empty(n_boot)
+        for b in range(n_boot):
+            bots[b] = doa[rng.choice(bottom_idx, bottom_idx.size, replace=True)].mean()
+            tops[b] = doa[rng.choice(top_idx, top_idx.size, replace=True)].mean()
+        gaps = tops - bots
+        out["group_gap_ci95"] = [float(np.percentile(gaps, 2.5)), float(np.percentile(gaps, 97.5))]
+        out["group_gap_p_le_0"] = float(np.mean(gaps <= 0.0))
+        out["bottom_group_ci95"] = [float(np.percentile(bots, 2.5)), float(np.percentile(bots, 97.5))]
+        out["top_group_ci95"] = [float(np.percentile(tops, 2.5)), float(np.percentile(tops, 97.5))]
+    return out

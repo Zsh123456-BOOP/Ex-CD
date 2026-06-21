@@ -1,0 +1,15 @@
+dataset: assist_09
+data_root: data_retricd
+output_dir: outputs
+model: ncdm          # ncdm | kancd
+epochs: 30
+lr: 0.001
+batch_size: 256
+dropout: 0.2
+latent_dim: 32
+grad_clip: 5.0
+patience: 8
+n_min: 2             # certificate: min informative items per cell
+mc_passes: 20
+seed: 42
+device: auto
