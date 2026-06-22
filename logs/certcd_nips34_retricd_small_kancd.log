@@ -1,0 +1,22 @@
+[certcd:nips34_retricd_small/kancd] S=1259 E=944 K=86 train=247197 test=71938 device=cuda:2
+  epoch 01 | loss 0.7923 | valid_auc 0.7268
+  epoch 02 | loss 0.6439 | valid_auc 0.7691
+  epoch 03 | loss 0.5636 | valid_auc 0.7799
+  epoch 04 | loss 0.5469 | valid_auc 0.7836
+  epoch 05 | loss 0.5392 | valid_auc 0.7855
+  epoch 06 | loss 0.5343 | valid_auc 0.7865
+  epoch 07 | loss 0.5302 | valid_auc 0.7868
+  epoch 08 | loss 0.5265 | valid_auc 0.7874
+  epoch 09 | loss 0.5227 | valid_auc 0.7881
+  epoch 10 | loss 0.5193 | valid_auc 0.7880
+  epoch 11 | loss 0.5158 | valid_auc 0.7876
+  epoch 12 | loss 0.5124 | valid_auc 0.7878
+  epoch 13 | loss 0.5090 | valid_auc 0.7867
+  epoch 14 | loss 0.5062 | valid_auc 0.7862
+  epoch 15 | loss 0.5035 | valid_auc 0.7857
+  epoch 16 | loss 0.5008 | valid_auc 0.7854
+  epoch 17 | loss 0.4985 | valid_auc 0.7839
+  early stop @ ep17 (best 0.7881 @ ep9)
+  TEST auc 0.7884 acc 0.7208 | DOA 0.7068 | T=1.11 ECE 0.0176->0.0112 (cert nan / abst 0.0112)
+  AURC certificate 0.2821 | excess vs count -0.0108 vs mc_dropout -0.0425 vs margin -0.1216 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/nips34_retricd_small/kancd/metrics.json

@@ -1,0 +1,23 @@
+[certcd:junyi/ncdm] S=10000 E=703 K=702 train=243163 test=80028 device=cuda:2
+  epoch 01 | loss 0.7056 | valid_auc 0.6945
+  epoch 02 | loss 0.6445 | valid_auc 0.7664
+  epoch 03 | loss 0.6126 | valid_auc 0.7705
+  epoch 04 | loss 0.5475 | valid_auc 0.7745
+  epoch 05 | loss 0.5239 | valid_auc 0.7782
+  epoch 06 | loss 0.5095 | valid_auc 0.7812
+  epoch 07 | loss 0.4950 | valid_auc 0.7835
+  epoch 08 | loss 0.4788 | valid_auc 0.7851
+  epoch 09 | loss 0.4557 | valid_auc 0.7862
+  epoch 10 | loss 0.4224 | valid_auc 0.7864
+  epoch 11 | loss 0.3757 | valid_auc 0.7861
+  epoch 12 | loss 0.3176 | valid_auc 0.7849
+  epoch 13 | loss 0.2542 | valid_auc 0.7817
+  epoch 14 | loss 0.1975 | valid_auc 0.7769
+  epoch 15 | loss 0.1504 | valid_auc 0.7691
+  epoch 16 | loss 0.1143 | valid_auc 0.7595
+  epoch 17 | loss 0.0850 | valid_auc 0.7505
+  epoch 18 | loss 0.0628 | valid_auc 0.7427
+  early stop @ ep18 (best 0.7864 @ ep10)
+  TEST auc 0.7970 acc 0.7457 | DOA 0.5151 | T=1.18 ECE 0.0334->0.0178 (cert nan / abst 0.0178)
+  AURC certificate 0.2552 | excess vs count +0.0000 vs mc_dropout -0.0555 vs margin -0.1156 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/junyi/ncdm/metrics.json

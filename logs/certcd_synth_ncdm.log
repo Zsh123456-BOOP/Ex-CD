@@ -1,0 +1,128 @@
+
+=== synthetic config 1/4: {'pure_frac': 0.6, 'entangled_frac': 0.3, 'items_per_student': 60} ===
+  epoch 01 | loss 0.9323 | valid_auc 0.5973
+  epoch 02 | loss 0.6901 | valid_auc 0.5844
+  epoch 03 | loss 0.6870 | valid_auc 0.5978
+  epoch 04 | loss 0.6868 | valid_auc 0.6126
+  epoch 05 | loss 0.6870 | valid_auc 0.6338
+  epoch 06 | loss 0.6868 | valid_auc 0.6635
+  epoch 07 | loss 0.6870 | valid_auc 0.6847
+  epoch 08 | loss 0.6870 | valid_auc 0.6930
+  epoch 09 | loss 0.6868 | valid_auc 0.6927
+  epoch 10 | loss 0.6839 | valid_auc 0.6925
+  epoch 11 | loss 0.6618 | valid_auc 0.6983
+  epoch 12 | loss 0.6204 | valid_auc 0.7110
+  epoch 13 | loss 0.5809 | valid_auc 0.7280
+  epoch 14 | loss 0.5373 | valid_auc 0.7478
+  epoch 15 | loss 0.4895 | valid_auc 0.7632
+  epoch 16 | loss 0.4447 | valid_auc 0.7727
+  epoch 17 | loss 0.4076 | valid_auc 0.7767
+  epoch 18 | loss 0.3812 | valid_auc 0.7775
+  epoch 19 | loss 0.3617 | valid_auc 0.7769
+  epoch 20 | loss 0.3459 | valid_auc 0.7758
+  epoch 21 | loss 0.3345 | valid_auc 0.7742
+  epoch 22 | loss 0.3246 | valid_auc 0.7729
+  epoch 23 | loss 0.3168 | valid_auc 0.7715
+  epoch 24 | loss 0.3098 | valid_auc 0.7702
+  epoch 25 | loss 0.3038 | valid_auc 0.7687
+  epoch 26 | loss 0.2967 | valid_auc 0.7675
+  early stop @ ep26 (best 0.7775 @ ep18)
+  cert_auroc 0.679 vs count_auroc 0.636 | acc certified 0.855 / abstained 0.651 | beats_count=True
+
+=== synthetic config 2/4: {'pure_frac': 0.3, 'entangled_frac': 0.4, 'items_per_student': 60} ===
+  epoch 01 | loss 0.8932 | valid_auc 0.5958
+  epoch 02 | loss 0.6883 | valid_auc 0.5000
+  epoch 03 | loss 0.6861 | valid_auc 0.5873
+  epoch 04 | loss 0.6860 | valid_auc 0.6120
+  epoch 05 | loss 0.6860 | valid_auc 0.6339
+  epoch 06 | loss 0.6862 | valid_auc 0.6576
+  epoch 07 | loss 0.6860 | valid_auc 0.6803
+  epoch 08 | loss 0.6860 | valid_auc 0.6890
+  epoch 09 | loss 0.6859 | valid_auc 0.6885
+  epoch 10 | loss 0.6842 | valid_auc 0.6877
+  epoch 11 | loss 0.6633 | valid_auc 0.6942
+  epoch 12 | loss 0.6200 | valid_auc 0.7062
+  epoch 13 | loss 0.5810 | valid_auc 0.7209
+  epoch 14 | loss 0.5393 | valid_auc 0.7371
+  epoch 15 | loss 0.4933 | valid_auc 0.7509
+  epoch 16 | loss 0.4475 | valid_auc 0.7589
+  epoch 17 | loss 0.4098 | valid_auc 0.7621
+  epoch 18 | loss 0.3823 | valid_auc 0.7625
+  epoch 19 | loss 0.3607 | valid_auc 0.7619
+  epoch 20 | loss 0.3456 | valid_auc 0.7604
+  epoch 21 | loss 0.3325 | valid_auc 0.7587
+  epoch 22 | loss 0.3218 | valid_auc 0.7571
+  epoch 23 | loss 0.3124 | valid_auc 0.7555
+  epoch 24 | loss 0.3036 | valid_auc 0.7539
+  epoch 25 | loss 0.2955 | valid_auc 0.7522
+  epoch 26 | loss 0.2891 | valid_auc 0.7507
+  early stop @ ep26 (best 0.7625 @ ep18)
+  cert_auroc 0.603 vs count_auroc 0.587 | acc certified 0.819 / abstained 0.716 | beats_count=True
+
+=== synthetic config 3/4: {'pure_frac': 0.6, 'entangled_frac': 0.3, 'items_per_student': 30} ===
+  epoch 01 | loss 1.2990 | valid_auc 0.5971
+  epoch 02 | loss 0.7161 | valid_auc 0.5984
+  epoch 03 | loss 0.6960 | valid_auc 0.5285
+  epoch 04 | loss 0.6927 | valid_auc 0.5715
+  epoch 05 | loss 0.6923 | valid_auc 0.6037
+  epoch 06 | loss 0.6923 | valid_auc 0.6095
+  epoch 07 | loss 0.6923 | valid_auc 0.6205
+  epoch 08 | loss 0.6923 | valid_auc 0.6328
+  epoch 09 | loss 0.6922 | valid_auc 0.6484
+  epoch 10 | loss 0.6923 | valid_auc 0.6677
+  epoch 11 | loss 0.6924 | valid_auc 0.6863
+  epoch 12 | loss 0.6921 | valid_auc 0.6995
+  epoch 13 | loss 0.6924 | valid_auc 0.7059
+  epoch 14 | loss 0.6923 | valid_auc 0.7075
+  epoch 15 | loss 0.6918 | valid_auc 0.7059
+  epoch 16 | loss 0.6902 | valid_auc 0.7053
+  epoch 17 | loss 0.6839 | valid_auc 0.7058
+  epoch 18 | loss 0.6664 | valid_auc 0.7082
+  epoch 19 | loss 0.6393 | valid_auc 0.7133
+  epoch 20 | loss 0.6077 | valid_auc 0.7201
+  epoch 21 | loss 0.5750 | valid_auc 0.7279
+  epoch 22 | loss 0.5419 | valid_auc 0.7359
+  epoch 23 | loss 0.5053 | valid_auc 0.7429
+  epoch 24 | loss 0.4660 | valid_auc 0.7484
+  epoch 25 | loss 0.4276 | valid_auc 0.7521
+  epoch 26 | loss 0.3915 | valid_auc 0.7542
+  epoch 27 | loss 0.3603 | valid_auc 0.7548
+  epoch 28 | loss 0.3304 | valid_auc 0.7547
+  epoch 29 | loss 0.3071 | valid_auc 0.7541
+  epoch 30 | loss 0.2868 | valid_auc 0.7528
+  cert_auroc 0.647 vs count_auroc 0.586 | acc certified 0.819 / abstained 0.623 | beats_count=True
+
+=== synthetic config 4/4: {'pure_frac': 0.3, 'entangled_frac': 0.4, 'items_per_student': 30} ===
+  epoch 01 | loss 1.0871 | valid_auc 0.5777
+  epoch 02 | loss 0.7061 | valid_auc 0.5837
+  epoch 03 | loss 0.6949 | valid_auc 0.5834
+  epoch 04 | loss 0.6934 | valid_auc 0.5845
+  epoch 05 | loss 0.6931 | valid_auc 0.5819
+  epoch 06 | loss 0.6932 | valid_auc 0.5946
+  epoch 07 | loss 0.6932 | valid_auc 0.6069
+  epoch 08 | loss 0.6933 | valid_auc 0.6231
+  epoch 09 | loss 0.6933 | valid_auc 0.6419
+  epoch 10 | loss 0.6932 | valid_auc 0.6630
+  epoch 11 | loss 0.6931 | valid_auc 0.6753
+  epoch 12 | loss 0.6929 | valid_auc 0.6801
+  epoch 13 | loss 0.6930 | valid_auc 0.6809
+  epoch 14 | loss 0.6920 | valid_auc 0.6802
+  epoch 15 | loss 0.6876 | valid_auc 0.6811
+  epoch 16 | loss 0.6720 | valid_auc 0.6840
+  epoch 17 | loss 0.6437 | valid_auc 0.6896
+  epoch 18 | loss 0.6100 | valid_auc 0.6964
+  epoch 19 | loss 0.5733 | valid_auc 0.7046
+  epoch 20 | loss 0.5340 | valid_auc 0.7127
+  epoch 21 | loss 0.4920 | valid_auc 0.7203
+  epoch 22 | loss 0.4500 | valid_auc 0.7262
+  epoch 23 | loss 0.4084 | valid_auc 0.7299
+  epoch 24 | loss 0.3725 | valid_auc 0.7317
+  epoch 25 | loss 0.3403 | valid_auc 0.7311
+  epoch 26 | loss 0.3132 | valid_auc 0.7296
+  epoch 27 | loss 0.2883 | valid_auc 0.7280
+  epoch 28 | loss 0.2685 | valid_auc 0.7261
+  epoch 29 | loss 0.2515 | valid_auc 0.7245
+  epoch 30 | loss 0.2398 | valid_auc 0.7227
+  cert_auroc 0.566 vs count_auroc 0.567 | acc certified 0.760 / abstained 0.662 | beats_count=False
+
+saved -> outputs/certcd_run/synth/synthetic_ncdm.json

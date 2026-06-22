@@ -1,0 +1,14 @@
+{
+  "dataset": "assist_17",
+  "model": "ncdm",
+  "target_n": 8,
+  "max_items": 120,
+  "n_min": 2,
+  "n_students": 400,
+  "items_to_target": {
+    "random": 44.9375,
+    "popularity": 29.06,
+    "max_disc": 30.095,
+    "certificate_greedy": 10.5975
+  }
+}

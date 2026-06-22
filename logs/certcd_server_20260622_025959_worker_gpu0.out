@@ -1,0 +1,212 @@
+>>> GPU0 cuda:0 task#0 real assist_09 ncdm -> logs/certcd_assist_09_ncdm.log
+[certcd:assist_09/ncdm] S=2493 E=17010 K=123 train=186055 test=55760 device=cuda:0
+  epoch 01 | loss 0.7101 | valid_auc 0.6553
+  epoch 02 | loss 0.6433 | valid_auc 0.7062
+  epoch 03 | loss 0.6427 | valid_auc 0.7181
+  epoch 04 | loss 0.6376 | valid_auc 0.7237
+  epoch 05 | loss 0.6030 | valid_auc 0.7290
+  epoch 06 | loss 0.5313 | valid_auc 0.7360
+  epoch 07 | loss 0.4856 | valid_auc 0.7416
+  epoch 08 | loss 0.4614 | valid_auc 0.7454
+  epoch 09 | loss 0.4466 | valid_auc 0.7479
+  epoch 10 | loss 0.4348 | valid_auc 0.7493
+  epoch 11 | loss 0.4247 | valid_auc 0.7502
+  epoch 12 | loss 0.4166 | valid_auc 0.7507
+  epoch 13 | loss 0.4094 | valid_auc 0.7509
+  epoch 14 | loss 0.4033 | valid_auc 0.7509
+  epoch 15 | loss 0.3984 | valid_auc 0.7507
+  epoch 16 | loss 0.3925 | valid_auc 0.7503
+  epoch 17 | loss 0.3875 | valid_auc 0.7501
+  epoch 18 | loss 0.3838 | valid_auc 0.7497
+  epoch 19 | loss 0.3803 | valid_auc 0.7492
+  epoch 20 | loss 0.3764 | valid_auc 0.7487
+  epoch 21 | loss 0.3735 | valid_auc 0.7482
+  epoch 22 | loss 0.3705 | valid_auc 0.7476
+  early stop @ ep22 (best 0.7509 @ ep14)
+  TEST auc 0.7527 acc 0.7116 | DOA 0.6012 | T=1.83 ECE 0.0973->0.0619 (cert 0.0549 / abst 0.1036)
+  AURC certificate 0.2943 | excess vs count +0.0000 vs mc_dropout -0.0905 vs margin -0.1193 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/assist_09/ncdm/metrics.json
+>>> GPU0 cuda:0 task#3 real assist_17 kancd -> logs/certcd_assist_17_kancd.log
+[certcd:assist_17/kancd] S=1702 E=3055 K=100 train=272400 test=79620 device=cuda:0
+  epoch 01 | loss 0.7897 | valid_auc 0.6224
+  epoch 02 | loss 0.6847 | valid_auc 0.6828
+  epoch 03 | loss 0.6824 | valid_auc 0.7493
+  epoch 04 | loss 0.6038 | valid_auc 0.7736
+  epoch 05 | loss 0.5498 | valid_auc 0.7831
+  epoch 06 | loss 0.5313 | valid_auc 0.7881
+  epoch 07 | loss 0.5198 | valid_auc 0.7904
+  epoch 08 | loss 0.5110 | valid_auc 0.7910
+  epoch 09 | loss 0.5033 | valid_auc 0.7917
+  epoch 10 | loss 0.4974 | valid_auc 0.7918
+  epoch 11 | loss 0.4915 | valid_auc 0.7917
+  epoch 12 | loss 0.4859 | valid_auc 0.7911
+  epoch 13 | loss 0.4806 | valid_auc 0.7906
+  epoch 14 | loss 0.4763 | valid_auc 0.7900
+  epoch 15 | loss 0.4718 | valid_auc 0.7895
+  epoch 16 | loss 0.4683 | valid_auc 0.7885
+  epoch 17 | loss 0.4640 | valid_auc 0.7878
+  epoch 18 | loss 0.4610 | valid_auc 0.7871
+  early stop @ ep18 (best 0.7918 @ ep10)
+  TEST auc 0.7887 acc 0.7180 | DOA 0.6982 | T=1.19 ECE 0.0493->0.0359 (cert 0.0325 / abst 0.0748)
+  AURC certificate 0.2762 | excess vs count +0.0007 vs mc_dropout -0.0858 vs margin -0.1061 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/assist_17/kancd/metrics.json
+>>> GPU0 cuda:0 task#6 real nips34_retricd_small ncdm -> logs/certcd_nips34_retricd_small_ncdm.log
+[certcd:nips34_retricd_small/ncdm] S=1259 E=944 K=86 train=247197 test=71938 device=cuda:0
+  epoch 01 | loss 0.7932 | valid_auc 0.6732
+  epoch 02 | loss 0.6905 | valid_auc 0.7601
+  epoch 03 | loss 0.6283 | valid_auc 0.7772
+  epoch 04 | loss 0.5475 | valid_auc 0.7839
+  epoch 05 | loss 0.5329 | valid_auc 0.7863
+  epoch 06 | loss 0.5233 | valid_auc 0.7876
+  epoch 07 | loss 0.5145 | valid_auc 0.7878
+  epoch 08 | loss 0.5054 | valid_auc 0.7866
+  epoch 09 | loss 0.4963 | valid_auc 0.7844
+  epoch 10 | loss 0.4900 | valid_auc 0.7817
+  epoch 11 | loss 0.4846 | valid_auc 0.7796
+  epoch 12 | loss 0.4805 | valid_auc 0.7773
+  epoch 13 | loss 0.4776 | valid_auc 0.7755
+  epoch 14 | loss 0.4750 | valid_auc 0.7736
+  epoch 15 | loss 0.4730 | valid_auc 0.7728
+  early stop @ ep15 (best 0.7878 @ ep7)
+  TEST auc 0.7889 acc 0.7211 | DOA 0.6606 | T=1.17 ECE 0.0204->0.0174 (cert nan / abst 0.0174)
+  AURC certificate 0.2817 | excess vs count -0.0099 vs mc_dropout -0.0512 vs margin -0.1216 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/nips34_retricd_small/ncdm/metrics.json
+>>> GPU0 cuda:0 task#9 synth synth kancd -> logs/certcd_synth_kancd.log
+
+=== synthetic config 1/4: {'pure_frac': 0.6, 'entangled_frac': 0.3, 'items_per_student': 60} ===
+  epoch 01 | loss 0.9769 | valid_auc 0.6385
+  epoch 02 | loss 0.6897 | valid_auc 0.5961
+  epoch 03 | loss 0.6870 | valid_auc 0.5000
+  epoch 04 | loss 0.6868 | valid_auc 0.6514
+  epoch 05 | loss 0.6870 | valid_auc 0.6642
+  epoch 06 | loss 0.6869 | valid_auc 0.6740
+  epoch 07 | loss 0.6849 | valid_auc 0.7024
+  epoch 08 | loss 0.6551 | valid_auc 0.7249
+  epoch 09 | loss 0.5997 | valid_auc 0.7517
+  epoch 10 | loss 0.5368 | valid_auc 0.7668
+  epoch 11 | loss 0.4853 | valid_auc 0.7735
+  epoch 12 | loss 0.4526 | valid_auc 0.7768
+  epoch 13 | loss 0.4293 | valid_auc 0.7782
+  epoch 14 | loss 0.4131 | valid_auc 0.7785
+  epoch 15 | loss 0.4018 | valid_auc 0.7785
+  epoch 16 | loss 0.3938 | valid_auc 0.7782
+  epoch 17 | loss 0.3857 | valid_auc 0.7768
+  epoch 18 | loss 0.3800 | valid_auc 0.7766
+  epoch 19 | loss 0.3744 | valid_auc 0.7750
+  epoch 20 | loss 0.3691 | valid_auc 0.7747
+  epoch 21 | loss 0.3651 | valid_auc 0.7738
+  epoch 22 | loss 0.3610 | valid_auc 0.7738
+  epoch 23 | loss 0.3573 | valid_auc 0.7730
+  early stop @ ep23 (best 0.7785 @ ep15)
+  cert_auroc 0.692 vs count_auroc 0.636 | acc certified 0.871 / abstained 0.660 | beats_count=True
+
+=== synthetic config 2/4: {'pure_frac': 0.3, 'entangled_frac': 0.4, 'items_per_student': 60} ===
+  epoch 01 | loss 1.0821 | valid_auc 0.6407
+  epoch 02 | loss 0.6902 | valid_auc 0.5992
+  epoch 03 | loss 0.6862 | valid_auc 0.6371
+  epoch 04 | loss 0.6861 | valid_auc 0.6500
+  epoch 05 | loss 0.6860 | valid_auc 0.6663
+  epoch 06 | loss 0.6859 | valid_auc 0.6799
+  epoch 07 | loss 0.6859 | valid_auc 0.6978
+  epoch 08 | loss 0.6688 | valid_auc 0.7094
+  epoch 09 | loss 0.6190 | valid_auc 0.7289
+  epoch 10 | loss 0.5677 | valid_auc 0.7424
+  epoch 11 | loss 0.5182 | valid_auc 0.7517
+  epoch 12 | loss 0.4825 | valid_auc 0.7558
+  epoch 13 | loss 0.4571 | valid_auc 0.7569
+  epoch 14 | loss 0.4383 | valid_auc 0.7585
+  epoch 15 | loss 0.4238 | valid_auc 0.7585
+  epoch 16 | loss 0.4111 | valid_auc 0.7588
+  epoch 17 | loss 0.3986 | valid_auc 0.7600
+  epoch 18 | loss 0.3897 | valid_auc 0.7586
+  epoch 19 | loss 0.3793 | valid_auc 0.7587
+  epoch 20 | loss 0.3706 | valid_auc 0.7588
+  epoch 21 | loss 0.3620 | valid_auc 0.7581
+  epoch 22 | loss 0.3553 | valid_auc 0.7565
+  epoch 23 | loss 0.3471 | valid_auc 0.7571
+  epoch 24 | loss 0.3402 | valid_auc 0.7559
+  epoch 25 | loss 0.3340 | valid_auc 0.7547
+  early stop @ ep25 (best 0.7600 @ ep17)
+  cert_auroc 0.627 vs count_auroc 0.588 | acc certified 0.822 / abstained 0.684 | beats_count=True
+
+=== synthetic config 3/4: {'pure_frac': 0.6, 'entangled_frac': 0.3, 'items_per_student': 30} ===
+  epoch 01 | loss 1.1216 | valid_auc 0.6582
+  epoch 02 | loss 0.7079 | valid_auc 0.6609
+  epoch 03 | loss 0.6953 | valid_auc 0.6157
+  epoch 04 | loss 0.6930 | valid_auc 0.6236
+  epoch 05 | loss 0.6923 | valid_auc 0.6610
+  epoch 06 | loss 0.6923 | valid_auc 0.6661
+  epoch 07 | loss 0.6923 | valid_auc 0.6731
+  epoch 08 | loss 0.6924 | valid_auc 0.6811
+  epoch 09 | loss 0.6923 | valid_auc 0.6851
+  epoch 10 | loss 0.6923 | valid_auc 0.6921
+  epoch 11 | loss 0.6897 | valid_auc 0.7082
+  epoch 12 | loss 0.6759 | valid_auc 0.7144
+  epoch 13 | loss 0.6420 | valid_auc 0.7278
+  epoch 14 | loss 0.5959 | valid_auc 0.7383
+  epoch 15 | loss 0.5455 | valid_auc 0.7442
+  epoch 16 | loss 0.4900 | valid_auc 0.7477
+  epoch 17 | loss 0.4421 | valid_auc 0.7486
+  epoch 18 | loss 0.4067 | valid_auc 0.7492
+  epoch 19 | loss 0.3750 | valid_auc 0.7486
+  epoch 20 | loss 0.3510 | valid_auc 0.7487
+  epoch 21 | loss 0.3318 | valid_auc 0.7477
+  epoch 22 | loss 0.3178 | valid_auc 0.7471
+  epoch 23 | loss 0.3039 | valid_auc 0.7454
+  epoch 24 | loss 0.2937 | valid_auc 0.7438
+  epoch 25 | loss 0.2840 | valid_auc 0.7434
+  epoch 26 | loss 0.2758 | valid_auc 0.7418
+  early stop @ ep26 (best 0.7492 @ ep18)
+  cert_auroc 0.658 vs count_auroc 0.594 | acc certified 0.827 / abstained 0.640 | beats_count=True
+
+=== synthetic config 4/4: {'pure_frac': 0.3, 'entangled_frac': 0.4, 'items_per_student': 30} ===
+  epoch 01 | loss 1.1618 | valid_auc 0.6363
+  epoch 02 | loss 0.7082 | valid_auc 0.6420
+  epoch 03 | loss 0.6950 | valid_auc 0.6431
+  epoch 04 | loss 0.6934 | valid_auc 0.6433
+  epoch 05 | loss 0.6933 | valid_auc 0.6464
+  epoch 06 | loss 0.6932 | valid_auc 0.6534
+  epoch 07 | loss 0.6932 | valid_auc 0.6615
+  epoch 08 | loss 0.6930 | valid_auc 0.6711
+  epoch 09 | loss 0.6932 | valid_auc 0.6807
+  epoch 10 | loss 0.6903 | valid_auc 0.6945
+  epoch 11 | loss 0.6730 | valid_auc 0.6984
+  epoch 12 | loss 0.6408 | valid_auc 0.7087
+  epoch 13 | loss 0.6021 | valid_auc 0.7190
+  epoch 14 | loss 0.5566 | valid_auc 0.7256
+  epoch 15 | loss 0.5074 | valid_auc 0.7255
+  epoch 16 | loss 0.4599 | valid_auc 0.7273
+  epoch 17 | loss 0.4213 | valid_auc 0.7257
+  epoch 18 | loss 0.3880 | valid_auc 0.7239
+  epoch 19 | loss 0.3619 | valid_auc 0.7238
+  epoch 20 | loss 0.3377 | valid_auc 0.7220
+  epoch 21 | loss 0.3186 | valid_auc 0.7210
+  epoch 22 | loss 0.3003 | valid_auc 0.7201
+  epoch 23 | loss 0.2839 | valid_auc 0.7185
+  epoch 24 | loss 0.2706 | valid_auc 0.7161
+  early stop @ ep24 (best 0.7273 @ ep16)
+  cert_auroc 0.563 vs count_auroc 0.572 | acc certified 0.744 / abstained 0.660 | beats_count=False
+
+saved -> outputs/certcd_run/synth/synthetic_kancd.json
+>>> GPU0 cuda:0 task#12 cat nips34_retricd_small ncdm -> logs/certcd_cat_nips34_retricd_small.log
+  epoch 01 | loss 0.7932 | valid_auc 0.6732
+  epoch 02 | loss 0.6905 | valid_auc 0.7601
+  epoch 03 | loss 0.6283 | valid_auc 0.7772
+  epoch 04 | loss 0.5475 | valid_auc 0.7839
+  epoch 05 | loss 0.5329 | valid_auc 0.7863
+  epoch 06 | loss 0.5233 | valid_auc 0.7876
+  epoch 07 | loss 0.5145 | valid_auc 0.7878
+  epoch 08 | loss 0.5054 | valid_auc 0.7866
+  epoch 09 | loss 0.4963 | valid_auc 0.7844
+  epoch 10 | loss 0.4900 | valid_auc 0.7817
+  epoch 11 | loss 0.4846 | valid_auc 0.7796
+  epoch 12 | loss 0.4805 | valid_auc 0.7773
+  epoch 13 | loss 0.4776 | valid_auc 0.7755
+  epoch 14 | loss 0.4750 | valid_auc 0.7736
+  epoch 15 | loss 0.4730 | valid_auc 0.7728
+  early stop @ ep15 (best 0.7878 @ ep7)
+  policy random               mean items-to-certify-8 = nan
+  policy popularity           mean items-to-certify-8 = nan
+  policy max_disc             mean items-to-certify-8 = nan
+  policy certificate_greedy   mean items-to-certify-8 = nan
+  saved -> outputs/certcd_run/cat/cat_nips34_retricd_small_ncdm.json

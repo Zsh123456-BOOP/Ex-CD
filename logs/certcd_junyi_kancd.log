@@ -1,0 +1,18 @@
+[certcd:junyi/kancd] S=10000 E=703 K=702 train=243163 test=80028 device=cuda:3
+  epoch 01 | loss 0.6846 | valid_auc 0.7675
+  epoch 02 | loss 0.6073 | valid_auc 0.7737
+  epoch 03 | loss 0.5284 | valid_auc 0.7824
+  epoch 04 | loss 0.4865 | valid_auc 0.7896
+  epoch 05 | loss 0.4411 | valid_auc 0.7925
+  epoch 06 | loss 0.3939 | valid_auc 0.7913
+  epoch 07 | loss 0.3492 | valid_auc 0.7880
+  epoch 08 | loss 0.3094 | valid_auc 0.7832
+  epoch 09 | loss 0.2721 | valid_auc 0.7771
+  epoch 10 | loss 0.2397 | valid_auc 0.7720
+  epoch 11 | loss 0.2134 | valid_auc 0.7663
+  epoch 12 | loss 0.1909 | valid_auc 0.7609
+  epoch 13 | loss 0.1732 | valid_auc 0.7560
+  early stop @ ep13 (best 0.7925 @ ep5)
+  TEST auc 0.8001 acc 0.7472 | DOA 0.5901 | T=1.36 ECE 0.0356->0.0242 (cert nan / abst 0.0242)
+  AURC certificate 0.2531 | excess vs count +0.0000 vs mc_dropout -0.0866 vs margin -0.1148 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/junyi/kancd/metrics.json

@@ -1,0 +1,20 @@
+[certcd:nips34_retricd_small/ncdm] S=1259 E=944 K=86 train=247197 test=71938 device=cuda:0
+  epoch 01 | loss 0.7932 | valid_auc 0.6732
+  epoch 02 | loss 0.6905 | valid_auc 0.7601
+  epoch 03 | loss 0.6283 | valid_auc 0.7772
+  epoch 04 | loss 0.5475 | valid_auc 0.7839
+  epoch 05 | loss 0.5329 | valid_auc 0.7863
+  epoch 06 | loss 0.5233 | valid_auc 0.7876
+  epoch 07 | loss 0.5145 | valid_auc 0.7878
+  epoch 08 | loss 0.5054 | valid_auc 0.7866
+  epoch 09 | loss 0.4963 | valid_auc 0.7844
+  epoch 10 | loss 0.4900 | valid_auc 0.7817
+  epoch 11 | loss 0.4846 | valid_auc 0.7796
+  epoch 12 | loss 0.4805 | valid_auc 0.7773
+  epoch 13 | loss 0.4776 | valid_auc 0.7755
+  epoch 14 | loss 0.4750 | valid_auc 0.7736
+  epoch 15 | loss 0.4730 | valid_auc 0.7728
+  early stop @ ep15 (best 0.7878 @ ep7)
+  TEST auc 0.7889 acc 0.7211 | DOA 0.6606 | T=1.17 ECE 0.0204->0.0174 (cert nan / abst 0.0174)
+  AURC certificate 0.2817 | excess vs count -0.0099 vs mc_dropout -0.0512 vs margin -0.1216 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/nips34_retricd_small/ncdm/metrics.json

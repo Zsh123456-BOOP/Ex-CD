@@ -1,0 +1,9 @@
+wrote 8 rows -> outputs/certcd_run/certcd_summary.csv
+  assist_09              kancd  AURC_cert=0.288612403218884 excess(count=5.133771582971347e-05, mcdo=-0.07525858372179683) kill_switch=False
+  assist_09              ncdm   AURC_cert=0.2943069636860057 excess(count=3.551519788203006e-06, mcdo=-0.0904997199767281) kill_switch=False
+  assist_17              kancd  AURC_cert=0.27620815504736235 excess(count=0.0006532095376396985, mcdo=-0.08583432817134443) kill_switch=False
+  assist_17              ncdm   AURC_cert=0.28019322812137054 excess(count=0.0009743724016653132, mcdo=-0.08957118646475964) kill_switch=False
+  junyi                  kancd  AURC_cert=0.2531089109816145 excess(count=0.0, mcdo=-0.08659086155738824) kill_switch=False
+  junyi                  ncdm   AURC_cert=0.25516145362895304 excess(count=0.0, mcdo=-0.055526214838815396) kill_switch=False
+  nips34_retricd_small   kancd  AURC_cert=0.28205754394620397 excess(count=-0.01084760457145656, mcdo=-0.04249770948935344) kill_switch=False
+  nips34_retricd_small   ncdm   AURC_cert=0.2816945023449478 excess(count=-0.009929946035278803, mcdo=-0.051228512144721544) kill_switch=False

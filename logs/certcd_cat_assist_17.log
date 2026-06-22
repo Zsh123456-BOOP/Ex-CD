@@ -1,0 +1,26 @@
+  epoch 01 | loss 0.7977 | valid_auc 0.5069
+  epoch 02 | loss 0.6847 | valid_auc 0.6344
+  epoch 03 | loss 0.6847 | valid_auc 0.7093
+  epoch 04 | loss 0.6847 | valid_auc 0.7246
+  epoch 05 | loss 0.6744 | valid_auc 0.7383
+  epoch 06 | loss 0.5998 | valid_auc 0.7499
+  epoch 07 | loss 0.5582 | valid_auc 0.7583
+  epoch 08 | loss 0.5385 | valid_auc 0.7642
+  epoch 09 | loss 0.5225 | valid_auc 0.7683
+  epoch 10 | loss 0.5066 | valid_auc 0.7709
+  epoch 11 | loss 0.4927 | valid_auc 0.7723
+  epoch 12 | loss 0.4781 | valid_auc 0.7728
+  epoch 13 | loss 0.4667 | valid_auc 0.7725
+  epoch 14 | loss 0.4545 | valid_auc 0.7715
+  epoch 15 | loss 0.4442 | valid_auc 0.7700
+  epoch 16 | loss 0.4345 | valid_auc 0.7684
+  epoch 17 | loss 0.4262 | valid_auc 0.7665
+  epoch 18 | loss 0.4192 | valid_auc 0.7645
+  epoch 19 | loss 0.4129 | valid_auc 0.7626
+  epoch 20 | loss 0.4076 | valid_auc 0.7605
+  early stop @ ep20 (best 0.7728 @ ep12)
+  policy random               mean items-to-certify-8 = 44.94
+  policy popularity           mean items-to-certify-8 = 29.06
+  policy max_disc             mean items-to-certify-8 = 30.09
+  policy certificate_greedy   mean items-to-certify-8 = 10.60
+  saved -> outputs/certcd_run/cat/cat_assist_17_ncdm.json

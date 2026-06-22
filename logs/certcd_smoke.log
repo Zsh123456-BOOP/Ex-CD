@@ -1,0 +1,9 @@
+[certcd:assist_09/ncdm] S=2493 E=17010 K=123 train=186055 test=55760 device=cuda:0
+  epoch 01 | loss 0.7101 | valid_auc 0.6553
+  epoch 02 | loss 0.6433 | valid_auc 0.7062
+  epoch 03 | loss 0.6427 | valid_auc 0.7181
+  epoch 04 | loss 0.6376 | valid_auc 0.7237
+  epoch 05 | loss 0.6030 | valid_auc 0.7290
+  TEST auc 0.7331 acc 0.6681 | DOA 0.5981 | T=0.97 ECE 0.0808->0.0744 (cert 0.0852 / abst 0.0715)
+  AURC certificate 0.3632 | excess vs count -0.0023 vs mc_dropout +0.0317 vs margin -0.1667 | KILL-SWITCH FAIL
+  saved -> outputs/smoke/assist_09/ncdm/metrics.json

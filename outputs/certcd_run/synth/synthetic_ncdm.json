@@ -1,0 +1,74 @@
+[
+  {
+    "best_valid_auc": 0.7775254694504488,
+    "n_cells": 40000,
+    "attempted_fraction": 0.9574,
+    "estimate_correct_overall": 0.779875,
+    "cert_auroc_attempted": 0.6789028050802217,
+    "count_auroc_attempted": 0.6363377913346405,
+    "cert_auroc_all": 0.685798296313266,
+    "acc_certified": 0.8552730734145084,
+    "acc_abstained": 0.6513153445594103,
+    "certified_cell_fraction": 0.630325,
+    "cert_beats_count": true,
+    "config": {
+      "pure_frac": 0.6,
+      "entangled_frac": 0.3,
+      "items_per_student": 60
+    }
+  },
+  {
+    "best_valid_auc": 0.7625115583741559,
+    "n_cells": 40000,
+    "attempted_fraction": 0.986,
+    "estimate_correct_overall": 0.7738,
+    "cert_auroc_attempted": 0.6031862216091961,
+    "count_auroc_attempted": 0.5874512991833066,
+    "cert_auroc_all": 0.6063982119343285,
+    "acc_certified": 0.8186106537314761,
+    "acc_abstained": 0.7163557533230647,
+    "certified_cell_fraction": 0.561775,
+    "cert_beats_count": true,
+    "config": {
+      "pure_frac": 0.3,
+      "entangled_frac": 0.4,
+      "items_per_student": 60
+    }
+  },
+  {
+    "best_valid_auc": 0.75482732112396,
+    "n_cells": 40000,
+    "attempted_fraction": 0.791125,
+    "estimate_correct_overall": 0.705525,
+    "cert_auroc_attempted": 0.6468500540135609,
+    "count_auroc_attempted": 0.5856445410963362,
+    "cert_auroc_all": 0.6719444013081245,
+    "acc_certified": 0.8194013832578106,
+    "acc_abstained": 0.6232994661615292,
+    "certified_cell_fraction": 0.4193,
+    "cert_beats_count": true,
+    "config": {
+      "pure_frac": 0.6,
+      "entangled_frac": 0.3,
+      "items_per_student": 30
+    }
+  },
+  {
+    "best_valid_auc": 0.7317021794346461,
+    "n_cells": 40000,
+    "attempted_fraction": 0.880475,
+    "estimate_correct_overall": 0.703575,
+    "cert_auroc_attempted": 0.565619670994437,
+    "count_auroc_attempted": 0.566553694161575,
+    "cert_auroc_all": 0.5849740453872024,
+    "acc_certified": 0.7599739166518465,
+    "acc_abstained": 0.6624443387661579,
+    "certified_cell_fraction": 0.421725,
+    "cert_beats_count": false,
+    "config": {
+      "pure_frac": 0.3,
+      "entangled_frac": 0.4,
+      "items_per_student": 30
+    }
+  }
+]

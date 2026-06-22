@@ -1,0 +1,25 @@
+[certcd:assist_09/kancd] S=2493 E=17010 K=123 train=186055 test=55760 device=cuda:2
+  epoch 01 | loss 0.7278 | valid_auc 0.6728
+  epoch 02 | loss 0.6400 | valid_auc 0.7217
+  epoch 03 | loss 0.5963 | valid_auc 0.7373
+  epoch 04 | loss 0.5285 | valid_auc 0.7469
+  epoch 05 | loss 0.4986 | valid_auc 0.7508
+  epoch 06 | loss 0.4821 | valid_auc 0.7532
+  epoch 07 | loss 0.4696 | valid_auc 0.7553
+  epoch 08 | loss 0.4615 | valid_auc 0.7554
+  epoch 09 | loss 0.4540 | valid_auc 0.7565
+  epoch 10 | loss 0.4480 | valid_auc 0.7563
+  epoch 11 | loss 0.4419 | valid_auc 0.7561
+  epoch 12 | loss 0.4373 | valid_auc 0.7568
+  epoch 13 | loss 0.4335 | valid_auc 0.7564
+  epoch 14 | loss 0.4288 | valid_auc 0.7564
+  epoch 15 | loss 0.4249 | valid_auc 0.7565
+  epoch 16 | loss 0.4211 | valid_auc 0.7559
+  epoch 17 | loss 0.4172 | valid_auc 0.7559
+  epoch 18 | loss 0.4146 | valid_auc 0.7553
+  epoch 19 | loss 0.4114 | valid_auc 0.7554
+  epoch 20 | loss 0.4092 | valid_auc 0.7548
+  early stop @ ep20 (best 0.7568 @ ep12)
+  TEST auc 0.7578 acc 0.7216 | DOA 0.6477 | T=1.62 ECE 0.0768->0.0224 (cert 0.0212 / abst 0.0474)
+  AURC certificate 0.2886 | excess vs count +0.0001 vs mc_dropout -0.0753 vs margin -0.1189 | KILL-SWITCH FAIL
+  saved -> outputs/certcd_run/assist_09/kancd/metrics.json
